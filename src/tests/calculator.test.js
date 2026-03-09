@@ -1,4 +1,4 @@
-const { add, subtract, multiply, divide } = require("../calculator");
+const { add, subtract, multiply, divide, modulo, exponentiate, sqrt } = require("../calculator");
 
 describe("calculator basic operations", () => {
   describe("addition", () => {
@@ -42,6 +42,52 @@ describe("calculator basic operations", () => {
 
     test("throws on division by zero", () => {
       expect(() => divide(5, 0)).toThrow("Division by zero is not allowed.");
+    });
+  });
+
+  describe("modulo", () => {
+    test("returns remainder of two numbers", () => {
+      expect(modulo(10, 3)).toBe(1);
+    });
+
+    test("returns zero when evenly divisible", () => {
+      expect(modulo(9, 3)).toBe(0);
+    });
+
+    test("throws on modulo by zero", () => {
+      expect(() => modulo(5, 0)).toThrow("Modulo by zero is not allowed.");
+    });
+  });
+
+  describe("exponentiation", () => {
+    test("raises a number to a power", () => {
+      expect(exponentiate(2, 10)).toBe(1024);
+    });
+
+    test("returns 1 when exponent is 0", () => {
+      expect(exponentiate(5, 0)).toBe(1);
+    });
+
+    test("handles fractional exponents", () => {
+      expect(exponentiate(4, 0.5)).toBe(2);
+    });
+  });
+
+  describe("square root", () => {
+    test("returns square root of a perfect square", () => {
+      expect(sqrt(16)).toBe(4);
+    });
+
+    test("returns square root of a non-perfect square", () => {
+      expect(sqrt(2)).toBeCloseTo(1.4142135623730951);
+    });
+
+    test("returns 0 for sqrt(0)", () => {
+      expect(sqrt(0)).toBe(0);
+    });
+
+    test("throws on square root of a negative number", () => {
+      expect(() => sqrt(-1)).toThrow("Square root of a negative number is not allowed.");
     });
   });
 });
